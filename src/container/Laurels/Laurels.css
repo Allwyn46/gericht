@@ -9,8 +9,27 @@
     justify-content: flex-start;
     align-items: flex-start;
     min-width: 230px;
-
     margin: 1rem;
+    padding: 0.75rem;
+    border-radius: 4px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.app__laurels_awards-card:hover {
+    transform: translateY(-4px);
+    background: rgba(220, 202, 135, 0.05);
+}
+
+.laurels__img-inner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+}
+
+.laurels__img-inner img {
+    width: 80%;
 }
 
 .app__laurels_awards-card img {

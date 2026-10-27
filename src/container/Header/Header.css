@@ -10,3 +10,15 @@
     line-height: 117px;
     font-size: 90px;
 }
+
+.header__img-inner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+}
+
+.header__img-inner img {
+    width: 80%;
+}

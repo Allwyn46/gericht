@@ -1,3 +1,15 @@
+.chef__img-inner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+}
+
+.chef__img-inner img {
+    width: 80%;
+}
+
 .app__chef-content {
     display: flex;
     flex-direction: column;

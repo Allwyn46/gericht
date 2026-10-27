@@ -1,45 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Intro.css';
-import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
+import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { meal } from '../../constants';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Intro = () => {
-
-   //USING USE REF
-
-   const vidRef = React.useRef()
-
-   //USING USE STATE
-
+   const vidRef = useRef(null);
+   const containerRef = useRef(null);
    const [playVideo, setplayVideo] = useState(false);
 
-   //FUNCTION TO PAUSE AND PLAY
+   useEffect(() => {
+      const ctx = gsap.context(() => {
+         gsap.fromTo(containerRef.current, {
+            scale: 0.92,
+            borderRadius: '24px',
+         }, {
+            scale: 1,
+            borderRadius: '0px',
+            ease: 'none',
+            scrollTrigger: {
+               trigger: containerRef.current,
+               start: 'top 85%',
+               end: 'top 30%',
+               scrub: 1,
+            },
+         });
+      }, containerRef);
+
+      return () => ctx.revert();
+   }, []);
 
    const handleVideo = () => {
-      setplayVideo((prevPlayVideo) => !prevPlayVideo)
-
-      if (playVideo) {
-         vidRef.current.pause();
-      } else {
-         vidRef.current.play();
-      }
-   }
+      setplayVideo((prevPlayVideo) => {
+         const next = !prevPlayVideo;
+         if (vidRef.current) {
+            if (next) {
+               vidRef.current.play();
+            } else {
+               vidRef.current.pause();
+            }
+         }
+         return next;
+      });
+   };
 
    return (
-      <div className='app__video'>
+      <div className='app__video' ref={containerRef}>
          <video src={meal} ref={vidRef} type="video/mp4" loop controls={false} muted />
          <div className='app__video-overlay flex__center'>
             <div className='app__video-overlay_circle flex__center' onClick={handleVideo}>
-
-               {/* IF ELSE STATEMENT TO SHOW PAUSE OR PLAY BUTTON */}
-
                {playVideo
                   ? (<BsPauseFill color='#fff' fontSize={30} />)
-                  : <BsFillPlayFill color='#fff' fontSize={30} />}
+                  : (<BsFillPlayFill color='#fff' fontSize={30} />)}
             </div>
          </div>
       </div>
-   )
-}
+   );
+};
 
-export default Intro
+export default Intro;

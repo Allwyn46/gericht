@@ -11,6 +11,8 @@
     width: 391px;
     height: 415px;
     z-index: 0;
+    will-change: transform;
+    opacity: 0.85;
 }
 
 .app__aboutus-content {
@@ -25,6 +27,7 @@
     align-items: flex-end;
     flex-direction: column;
     text-align: right;
+    will-change: transform, opacity;
 }
 
 .app__aboutus-content_knife {
@@ -33,6 +36,7 @@
 
 .app__aboutus-content_knife img {
     height: 910px;
+    will-change: transform;
 }
 
 .app__aboutus-content_history {
